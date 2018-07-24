@@ -55,9 +55,12 @@ def _fetch():
                 'unable to fetch docker resource {}: {}'.format(res_name, e),
                 level=hookenv.ERROR)
             failed.append(res_name)
+            set_flag('{}.failed'.format(prefix))
+            clear_flag('{}.available'.format(prefix))
         else:
             unitdata.kv().set('{}.image-info'.format(prefix), image_info)
             set_flag('{}.available'.format(prefix))
+            clear_flag('{}.failed'.format(prefix))
     if failed:
         if should_set_status:
             pl = 's' if len(failed) > 1 else ''
