@@ -1,0 +1,8 @@
+repo: 'https://github.com/juju-solutions/layer-docker-resource'
+includes: ['layer:status']
+defines:
+  set-status:
+    description: |
+      Whether or not to automatically set status messages using 'layer:status'.
+    type: boolean
+    default: true
