@@ -14,6 +14,11 @@ Using this layer generally consists of the following steps:
   * Wait for `layer.docker-resource.{resource_name}.available`
   * Call `layer.docker_resource.get_info(resource_name)`
 
+Alternatively, a resource can be marked with `auto-fetch: true` in its
+definition in `metadata.yaml`, in which case it will automatically have
+`fetch()` called on it, if it is of type `docker`.  That way, you can
+skip the first step and remove the need for an additional handler.
+
 
 Example
 =======
