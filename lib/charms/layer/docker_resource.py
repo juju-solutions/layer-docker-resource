@@ -3,7 +3,8 @@ from pathlib import Path
 
 from charmhelpers.core import hookenv
 from charmhelpers.core import unitdata
-from charms.reactive import set_flag, clear_flag
+from charms.reactive import set_flag, clear_flag, toggle_flag, is_flag_set
+from charms.reactive import data_changed
 
 from charms import layer
 
@@ -57,10 +58,15 @@ def _fetch():
             failed.append(res_name)
             set_flag('{}.failed'.format(prefix))
             clear_flag('{}.available'.format(prefix))
+            clear_flag('{}.changed'.format(prefix))
         else:
             unitdata.kv().set('{}.image-info'.format(prefix), image_info)
+            was_available = is_flag_set('{}.available'.format(prefix))
+            is_changed = data_changed(prefix, image_info)
             set_flag('{}.available'.format(prefix))
             clear_flag('{}.failed'.format(prefix))
+            toggle_flag('{}.changed'.format(prefix),
+                        was_available and is_changed)
     if failed:
         if should_set_status:
             pl = 's' if len(failed) > 1 else ''
