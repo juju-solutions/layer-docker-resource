@@ -62,10 +62,11 @@ def _fetch():
         else:
             unitdata.kv().set('{}.image-info'.format(prefix), image_info)
             was_available = is_flag_set('{}.available'.format(prefix))
+            is_changed = data_changed(prefix, image_info)
             set_flag('{}.available'.format(prefix))
             clear_flag('{}.failed'.format(prefix))
             toggle_flag('{}.changed'.format(prefix),
-                        was_available and data_changed(prefix, image_info))
+                        was_available and is_changed)
     if failed:
         if should_set_status:
             pl = 's' if len(failed) > 1 else ''
