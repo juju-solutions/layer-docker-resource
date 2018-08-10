@@ -30,8 +30,8 @@ Given a Kubernetes charm with the following resource definition in the
 name: my-charm
 resources:
   my-resource:
-    type: docker
-    description: "The Docker image for this charm"
+    type: oci-image
+    description: "The image for this charm"
 ```
 
 The charm would then use the follow reactive code to use the Docker image
