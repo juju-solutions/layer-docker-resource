@@ -8,7 +8,7 @@ from charms import layer
 def auto_fetch():
     resources = hookenv.metadata().get('resources', {})
     for name, resource in resources.items():
-        is_docker = resource.get('type') == 'docker'
+        is_docker = resource.get('type') == 'oci-image'
         is_auto_fetch = resource.get('auto-fetch', False)
         if is_docker and is_auto_fetch:
             layer.docker_resource.fetch(name)
