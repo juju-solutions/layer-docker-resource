@@ -31,6 +31,7 @@ name: my-charm
 resources:
   my-resource:
     type: oci-image
+    auto-fetch: true
     description: "The image for this charm"
 ```
 
@@ -41,11 +42,6 @@ resource:
 from charms.reactive import when, when_not
 
 from charms import layer
-
-
-@when_not('layer.docker-resource.my-resource.fetched')
-def fetch_resource():
-    layer.docker-resource.fetch('my-resource')
 
 
 @when('layer.docker-resource.my-resource.available')
