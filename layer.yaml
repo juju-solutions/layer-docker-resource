@@ -6,3 +6,17 @@ defines:
       Whether or not to automatically set status messages using 'layer:status'.
     type: boolean
     default: true
+proof:
+  resources:
+    - name: upstream-source
+      type: String
+      missing: ''
+      description: Hint for the built charm, or charm build systems, on where this resource originates.
+    - name: auto-fetch
+      type: Boolean
+      missing: false
+      description: Whether or not to automatically fetch this resource.
+    - name: validator
+      type: String
+      missing: ''
+      description: Held for future use; not currently used.
